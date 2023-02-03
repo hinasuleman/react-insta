@@ -9,7 +9,7 @@ export const login = async (username,email,password,setter,cookie) => {
             password: password
         })
         console.log("body: ", body)
-      const response = await fetch("http://localhost:5001/login",
+      const response = await fetch(`${process.env.REACT_APP_REST_API_URL}login`,
     {
         method:"POST",
         headers: {"Content-Type" : "application/json"},
@@ -30,7 +30,7 @@ storeCookie("jwt_token",data.token,7);
 }
 export const authCheck = async (jwt_token) => {
     try {
-       const response = await fetch ("http://localhost:5001/authCheck", {
+       const response = await fetch (`${process.env.REACT_APP_REST_API_URL}authCheck`, {
         method: "GET",
         headers: {
             "Content-Type" : "application/json",
@@ -50,7 +50,7 @@ export const authCheck = async (jwt_token) => {
 
 export const addUser = async (username,email,password,setter,cookie) => {
     try {
-        const response = await fetch("http://localhost:5001/addUser", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}addUser`, {
             method:"POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify({
@@ -74,7 +74,7 @@ export const addUser = async (username,email,password,setter,cookie) => {
 export const updateEmail = async (username,newemail,password,setter,cookie) => {
     try {
         let jwt_token = readCookie("jwt_token")
-        const response = await fetch("http://localhost:5001/updateEmail", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}updateEmail`, {
             method:"PUT",
             headers: {
                 "Content-Type" : "application/json",
@@ -103,7 +103,7 @@ export const listUsers = async (username,email,password,setter,cookie) => {
         
         let jwt_token = readCookie("jwt_token")
         console.log("listUsers",jwt_token);
-        const response = await fetch("http://localhost:5001/listUser", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}listUser`, {
             method:"GET",
             headers: {"Content-Type" : "application/json",
                       "Authorization" :`Bearer ${jwt_token}`
@@ -126,7 +126,7 @@ export const deleteUser = async (jwt_token,username,email,password) => {
     try {
         let jwt_token = readCookie("jwt_token")
         console.log("deleteUser",jwt_token);
-       const response = await fetch ("http://localhost:5001/deleteUser", {
+       const response = await fetch (`${process.env.REACT_APP_REST_API_URL}deleteUser`, {
         method: "DELETE",
         headers: {
             "Content-Type" : "application/json",
